@@ -1,6 +1,5 @@
 import { expect, describe, it } from "vitest";
 import {
-  Item,
   items,
   updateQuality,
   BasicItem,

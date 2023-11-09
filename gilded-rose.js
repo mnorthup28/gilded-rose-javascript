@@ -1,25 +1,27 @@
 export { Item, BasicItem, LegendaryItem, CheezeItem, ConjuredItem, TicketItem };
+
 class Item {
   constructor(name, sellIn, quality) {
     this.name = name;
     this.sellIn = sellIn;
     this.quality = quality;
   }
-}
-
-class BasicItem extends Item {
   updateQuality() {
     this.sellIn--;
-    if (this.quality > 0) {
-      this.quality--;
+    if (this.sellIn < 0) {
+      this.quality = Math.max(0, this.quality - 2);
+    } else {
+      this.quality = Math.max(0, this.quality - 1);
     }
   }
 }
 
+class BasicItem extends Item {}
+
 class CheezeItem extends Item {
   updateQuality() {
     this.sellIn--;
-    if (quality < 50) {
+    if (this.quality < 50) {
       this.quality++;
     }
   }
@@ -32,14 +34,14 @@ class LegendaryItem extends Item {
 class TicketItem extends Item {
   updateQuality() {
     this.sellIn--;
-    if (this.sellIn <= 10) {
-      this.quality += 2;
-    } else if (this.sellIn <= 5) {
-      this.quality += 3;
-    } else if (this.sellIn < 0) {
-      this.quality = 0;
-    } else {
+    if (this.sellIn > 10) {
       this.quality++;
+    } else if (this.sellIn >= 5 && this.sellIn <= 10) {
+      this.quality += 2;
+    } else if (this.sellIn >= 0 && this.sellIn < 5) {
+      this.quality += 3;
+    } else {
+      this.quality = 0;
     }
   }
 }
@@ -64,51 +66,6 @@ items.push(new ConjuredItem("Conjured Mana Cake", 3, 6));
 
 export const updateQuality = () => {
   for (let item of items) {
-    if (
-      item.name != "Aged Brie" &&
-      item.name != "Backstage passes to a TAFKAL80ETC concert"
-    ) {
-      if (item.quality > 0) {
-        if (item.name != "Sulfuras, Hand of Ragnaros") {
-          item.quality = item.quality - 1;
-        }
-      }
-    } else {
-      if (item.quality < 50) {
-        item.quality = item.quality + 1;
-        if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-          if (item.sellIn < 11) {
-            if (item.quality < 50) {
-              item.quality = item.quality + 1;
-            }
-          }
-          if (item.sellIn < 6) {
-            if (item.quality < 50) {
-              item.quality = item.quality + 1;
-            }
-          }
-        }
-      }
-    }
-    if (item.name != "Sulfuras, Hand of Ragnaros") {
-      item.sellIn = item.sellIn - 1;
-    }
-    if (item.sellIn < 0) {
-      if (item.name != "Aged Brie") {
-        if (item.name != "Backstage passes to a TAFKAL80ETC concert") {
-          if (item.quality > 0) {
-            if (item.name != "Sulfuras, Hand of Ragnaros") {
-              item.quality = item.quality - 1;
-            }
-          }
-        } else {
-          item.quality = item.quality - item.quality;
-        }
-      } else {
-        if (item.quality < 50) {
-          item.quality = item.quality + 1;
-        }
-      }
-    }
+    item.updateQuality();
   }
 };

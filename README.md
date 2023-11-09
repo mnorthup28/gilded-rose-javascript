@@ -23,12 +23,12 @@ First an introduction to our system:
 
 Pretty simple, right? Well this is where it gets interesting:
 
-- Once the `sellIn` days is less then zero, `quality` degrades twice as fast.
-- The `quality` of an item is never negative.
-- "Aged Brie" actually increases in `quality` the older it gets.
-- The `quality` of an item is never more than `50`.
-- "Sulfuras, Hand of Ragnaros," being a legendary item, never has to be sold nor does it decrease in `quality`.
-- "Backstage passes to a TAFKAL80ETC concert", increase in `quality` as it's `sellIn` value decreases:
+- Once the `sellIn` days is less then zero, `quality` degrades twice as fast. xxx
+- The `quality` of an item is never negative. xxx
+- "Aged Brie" actually increases in `quality` the older it gets. xxx
+- The `quality` of an item is never more than `50`. xxx
+- "Sulfuras, Hand of Ragnaros," being a legendary item, never has to be sold nor does it decrease in `quality`. xxx
+- "Backstage passes to a TAFKAL80ETC concert", increase in `quality` as it's `sellIn` value decreases: xxx
   - `quality` increases by `2` when there are `10` days or less left before the concert.
   - `quality` increases by `3` when there are `5` days or less left before the concert.
   - `quality` drops to `0` after the concert.
@@ -48,13 +48,13 @@ never alters.
 You are tasked with performing the following:
 
 **1. Writing Tests**
-
+xxx
 Before refactoring the existing codebase, it's a good idea to write sufficient test-cases to codify the behavior of the current `updateQuality` implementation. You can use the specifications above as a guide for what tests you need to write. There is an example test in `gilded-rose.spec.js` to use as a guide.
 
 The tests are written using [vitest](https://vitest.dev/) as the testing framework and are run using `$ npm run test` in your terminal.
-
+xxx
 **2. Refactoring**
-
+(up next)
 Once you have a strong test suite to prevent you from breaking existing behavior, try to refactor the ugly `updateQuality` function, running the test suite periodically. Notice that the thing that makes `updateQuality` difficult to read is the number of nested conditionals. How can we utilize OOP to reduce the number of conditionals?
 
 **3. Completing the New Feature**
